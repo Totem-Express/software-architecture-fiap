@@ -9,7 +9,7 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class UniqueUserValidatorTest {
 
@@ -52,5 +52,15 @@ class UniqueUserValidatorTest {
         assertThat(errors.getAllErrors()).hasSize(1);
         assertThat(errors.getAllErrors().get(0).getCode()).isEqualTo("user.already.exists");
         assertThat(errors.getAllErrors().get(0).getDefaultMessage()).isEqualTo("Já existe um usuário cadastrado com este email ou cpf!");
+    }
+
+    @Test
+    void should_return_false_if_already_contain_erros() {
+        CreateUserRequest request = new CreateUserRequest("name", "email@example.com", "123.456.789-00");
+        Errors errors = new BeanPropertyBindingResult(request, "createUserRequest");
+        errors.reject("error", "error");
+        assertThat(errors.hasErrors()).isTrue();
+        validator.validate(request, errors);
+        verify(repository, never()).existsByEmailOrCpf(request.email(), request.cpf());
     }
 }
