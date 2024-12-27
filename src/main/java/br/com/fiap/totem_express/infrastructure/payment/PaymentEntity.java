@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 import static jakarta.persistence.EnumType.STRING;
 
+//TODO: teste
 @Entity(name = "payment")
 public class PaymentEntity {
 

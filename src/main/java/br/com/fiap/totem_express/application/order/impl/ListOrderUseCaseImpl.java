@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
+//TODO: teste
 public class ListOrderUseCaseImpl implements ListOrderUseCase {
 
     private final OrderGateway orderGateway;

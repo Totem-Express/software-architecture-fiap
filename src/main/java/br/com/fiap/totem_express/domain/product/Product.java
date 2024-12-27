@@ -8,7 +8,7 @@ import br.com.fiap.totem_express.shared.invariant.Invariant;
 
 import static br.com.fiap.totem_express.shared.invariant.Rule.*;
 
-
+//TODO: teste
 public class Product {
 
     private Long id;

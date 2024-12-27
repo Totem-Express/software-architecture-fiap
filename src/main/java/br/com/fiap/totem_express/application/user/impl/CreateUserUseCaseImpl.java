@@ -5,6 +5,7 @@ import br.com.fiap.totem_express.application.user.UserGateway;
 import br.com.fiap.totem_express.application.user.input.NewUserInput;
 import br.com.fiap.totem_express.application.user.output.DefaultUserView;
 
+//TODO: teste
 public class CreateUserUseCaseImpl implements CreateUserUseCase {
 
     private final UserGateway gateway;

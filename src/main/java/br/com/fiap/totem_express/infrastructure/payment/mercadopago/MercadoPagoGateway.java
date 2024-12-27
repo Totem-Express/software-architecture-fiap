@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpMethod.POST;
 
+//TODO: teste
 public class MercadoPagoGateway implements PaymentProcessorGateway {
 
     private final RestTemplate restTemplate;

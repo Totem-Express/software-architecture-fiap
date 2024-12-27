@@ -8,6 +8,7 @@ import jakarta.validation.constraints.*;
 import java.math.*;
 import java.time.*;
 
+//TODO: teste
 @Entity(name = "order_item")
 public class OrderItemEntity {
 

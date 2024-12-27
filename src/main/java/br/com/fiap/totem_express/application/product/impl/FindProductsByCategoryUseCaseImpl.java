@@ -10,6 +10,7 @@ import br.com.fiap.totem_express.application.product.output.ProductView;
 import br.com.fiap.totem_express.domain.product.Category;
 import br.com.fiap.totem_express.domain.product.Product;
 
+//TODO: teste
 public class FindProductsByCategoryUseCaseImpl implements FindProductsByCategoryUseCase {
 
     private final ProductGateway gateway;

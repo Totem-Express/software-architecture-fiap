@@ -9,7 +9,7 @@ import java.util.UUID;
 import static br.com.fiap.totem_express.domain.payment.Status.FAILED;
 import static br.com.fiap.totem_express.domain.payment.Status.PAID;
 import static br.com.fiap.totem_express.shared.invariant.Rule.notNull;
-
+//TODO: teste
 public class Payment {
 
     private Long id;

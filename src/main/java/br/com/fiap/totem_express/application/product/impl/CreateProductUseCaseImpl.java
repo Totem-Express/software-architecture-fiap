@@ -6,6 +6,7 @@ import br.com.fiap.totem_express.application.product.input.NewProductInput;
 import br.com.fiap.totem_express.application.product.output.ProductView;
 import br.com.fiap.totem_express.domain.product.Product;
 
+//TODO: teste
 public class CreateProductUseCaseImpl implements CreateProductUseCase {
 
     private final ProductGateway gateway;

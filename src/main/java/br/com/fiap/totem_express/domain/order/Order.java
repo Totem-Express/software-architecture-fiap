@@ -12,6 +12,7 @@ import br.com.fiap.totem_express.shared.invariant.Invariant;
 import static br.com.fiap.totem_express.shared.invariant.Rule.notEmpty;
 import static br.com.fiap.totem_express.shared.invariant.Rule.notNull;
 
+//TODO: teste
 public class Order {
     private Long id;
     private LocalDateTime createdAt = LocalDateTime.now();

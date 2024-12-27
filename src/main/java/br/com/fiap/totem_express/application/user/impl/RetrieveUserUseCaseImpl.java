@@ -7,6 +7,7 @@ import br.com.fiap.totem_express.application.user.output.DefaultUserView;
 import java.util.List;
 import java.util.Optional;
 
+//TODO: teste
 public class RetrieveUserUseCaseImpl implements RetrieveUserUseCase {
 
     private final UserGateway gateway;
