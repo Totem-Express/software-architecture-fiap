@@ -14,7 +14,7 @@ public class InvariantException extends RuntimeException {
     }
 
     public InvariantException(String message, Object actual){
-        this.message = message;
+        this(message);
         this.value = actual;
     }
 
