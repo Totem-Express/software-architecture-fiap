@@ -38,4 +38,10 @@ public class ErrorHandler {
                 ));
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public NotFoundError handleIllegalArgumentException(IllegalArgumentException exception) {
+        return new NotFoundError("Not Found", exception.getMessage());
+    }
+
 }

@@ -34,7 +34,7 @@ public class ErrorHandlerTest {
     }
 
     @Test
-    public void should_reunt_field_errors_and_bad_request() {
+    public void should_return_field_errors_and_bad_request() {
         MethodArgumentNotValidException exception = mock(MethodArgumentNotValidException.class);
         when(exception.getFieldErrors()).thenReturn(List.of(new org.springframework.validation.FieldError("fieldError", "field", "defaultMessage for fieldError")));
         when(exception.getGlobalErrors()).thenReturn(List.of(new org.springframework.validation.ObjectError("globalError", "defaultMessage for globalError")));
@@ -47,5 +47,15 @@ public class ErrorHandlerTest {
             new FieldError(null, "defaultMessage for globalError")
         );
     
+    }
+
+    @Test
+    public void should_return_not_found_error_for_illegal_argument_exception() {
+        IllegalArgumentException exception = new IllegalArgumentException("Product with ID 1 not found");
+
+        NotFoundError response = errorHandler.handleIllegalArgumentException(exception);
+
+        assertThat(response.error()).isEqualTo("Not Found");
+        assertThat(response.message()).isEqualTo(exception.getMessage());
     }
 }
