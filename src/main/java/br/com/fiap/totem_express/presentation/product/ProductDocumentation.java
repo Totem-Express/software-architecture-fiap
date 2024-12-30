@@ -3,6 +3,8 @@ package br.com.fiap.totem_express.presentation.product;
 import java.util.List;
 
 import br.com.fiap.totem_express.application.product.output.ProductView;
+import br.com.fiap.totem_express.presentation.errors.BadRequestError;
+import br.com.fiap.totem_express.presentation.errors.NotFoundError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.*;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -30,7 +32,7 @@ public interface ProductDocumentation {
     @Operation(summary = "Exclui Produto ", description = "Exclui o produto com o ID fornecido")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "O produto foi removido com sucesso" ),
-            @ApiResponse(responseCode = "404", description = "ID fornecido não existe" )
+            @ApiResponse(responseCode = "404", description = "ID fornecido não existe", content = {@Content(schema = @Schema(implementation = NotFoundError.class))}),
     })
     ResponseEntity<Void> delete(@PathVariable Long id);
 
