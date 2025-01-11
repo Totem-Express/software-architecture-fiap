@@ -1,5 +1,6 @@
 package br.com.fiap.totem_express.presentation.payment;
 
+import br.com.fiap.totem_express.TestcontainersConfiguration;
 import br.com.fiap.totem_express.application.payment.CheckPaymentStatusUseCase;
 import br.com.fiap.totem_express.application.payment.ProcessPaymentWebhookUseCase;
 import br.com.fiap.totem_express.application.payment.output.PaymentView;
@@ -7,6 +8,7 @@ import br.com.fiap.totem_express.application.product.output.ProductView;
 import br.com.fiap.totem_express.infrastructure.jwt.JWTService;
 import br.com.fiap.totem_express.presentation.payment.request.PaymentWebhookRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
@@ -14,6 +16,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -25,6 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@Import(TestcontainersConfiguration.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureJsonTesters

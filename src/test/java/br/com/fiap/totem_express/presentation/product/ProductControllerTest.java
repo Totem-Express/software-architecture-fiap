@@ -1,5 +1,6 @@
 package br.com.fiap.totem_express.presentation.product;
 
+import br.com.fiap.totem_express.TestcontainersConfiguration;
 import br.com.fiap.totem_express.application.product.CreateProductUseCase;
 import br.com.fiap.totem_express.application.product.DeleteProductUseCase;
 import br.com.fiap.totem_express.application.product.FindProductsByCategoryUseCase;
@@ -9,6 +10,7 @@ import br.com.fiap.totem_express.infrastructure.jwt.JWTService;
 import br.com.fiap.totem_express.presentation.product.request.CreateProductRequest;
 import br.com.fiap.totem_express.presentation.product.request.UpdateProductRequest;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
@@ -16,6 +18,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -33,6 +36,7 @@ import static org.springframework.http.HttpStatus.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Import(TestcontainersConfiguration.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureJsonTesters
