@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 
@@ -54,6 +54,6 @@ public class CreateUserSteps {
 
     @Then("the response status should be {int}")
     public void theResponseStatusShouldBe(int status) {
-        assertEquals(status, responseStatus);
+        assertThat(status).isEqualTo(responseStatus);
     }
 }
