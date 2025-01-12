@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static br.com.fiap.totem_express.domain.payment.Status.*;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

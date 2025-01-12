@@ -16,7 +16,7 @@ import static br.com.fiap.totem_express.domain.order.Status.PREPARING;
 import static br.com.fiap.totem_express.domain.order.Status.RECEIVED;
 import static br.com.fiap.totem_express.domain.payment.Status.PENDING;
 import static br.com.fiap.totem_express.domain.user.Role.USER;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
