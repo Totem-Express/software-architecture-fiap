@@ -21,12 +21,10 @@ class CreateUserUseCaseImplTest {
 
     private CreateUserUseCaseImpl createUserUseCase;
 
-    private UserRepository repository;
 
     @BeforeEach
     void setUp() {
         gateway = mock(UserGateway.class);
-        repository = mock(UserRepository.class);
         createUserUseCase = new CreateUserUseCaseImpl(gateway);
     }
 

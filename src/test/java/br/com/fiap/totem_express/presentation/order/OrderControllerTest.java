@@ -68,7 +68,7 @@ class OrderControllerTest {
                 null
         );
 
-        when(createUseCase.execute(any(CreateOrderRequest.class))).thenReturn(orderView);
+        when(createUseCase.execute(createOrder)).thenReturn(orderView);
 
         mockMvc.perform(post("/api/order/create")
                         .contentType(MediaType.APPLICATION_JSON)

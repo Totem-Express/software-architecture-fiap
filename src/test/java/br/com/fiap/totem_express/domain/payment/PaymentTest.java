@@ -24,7 +24,7 @@ class PaymentTest {
     @Test
     void should_return_exception_when_initialize_payment_with_amount_is_null() {
         assertThatThrownBy(() -> new Payment(null))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(InvariantException.class)
                 .hasMessageContaining("Payment amount must be not null");
     }
 
