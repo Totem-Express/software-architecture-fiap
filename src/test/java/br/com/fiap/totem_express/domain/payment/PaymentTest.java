@@ -32,7 +32,7 @@ class PaymentTest {
     void should_update_status_and_updatedAt_when_processPayment_called() {
         var payment = new Payment(new BigDecimal("29.90"));
 
-        LocalDateTime beforeUpdate = payment.getUpdatedAt();
+        LocalDateTime beforeUpdate = LocalDateTime.now();
         payment.processPayment(FAILED);
 
         assertThat(payment.getStatus()).isEqualTo(FAILED);
