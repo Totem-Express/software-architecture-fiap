@@ -64,7 +64,7 @@ class OrderControllerTest {
 
     @Test
     void should_return_http_201_and_created_order_when_order_is_created() throws Exception {
-        ProductView productView = createProductUseCase.create(new CreateProductRequest("sandwaich", "delicious", "img.png", BigDecimal.TEN, Category.DISH));
+        ProductView productView = createProductUseCase.create(new CreateProductRequest("sandwich", "delicious", "img.png", BigDecimal.TEN, Category.DISH));
         Set<OrderItemRequest> itemsRequest = new HashSet<>();
         itemsRequest.add(new OrderItemRequest(productView.id(), 2L));
         var createOrder = new CreateOrderRequest(itemsRequest, Optional.empty());
