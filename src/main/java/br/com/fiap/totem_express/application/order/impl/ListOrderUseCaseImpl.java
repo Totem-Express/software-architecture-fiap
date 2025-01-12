@@ -3,11 +3,9 @@ package br.com.fiap.totem_express.application.order.impl;
 import br.com.fiap.totem_express.application.order.ListOrderUseCase;
 import br.com.fiap.totem_express.application.order.OrderGateway;
 import br.com.fiap.totem_express.application.order.output.OrderView;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-//TODO: teste
 public class ListOrderUseCaseImpl implements ListOrderUseCase {
 
     private final OrderGateway orderGateway;
