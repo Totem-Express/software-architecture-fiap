@@ -8,9 +8,7 @@ import br.com.fiap.totem_express.infrastructure.jwt.JWTService;
 import br.com.fiap.totem_express.presentation.user.requests.CreateUserRequest;
 import br.com.fiap.totem_express.presentation.user.validators.UniqueUserValidator;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,7 +21,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -90,6 +87,8 @@ class UserControllerTest {
                         )
                 )
                 .andExpect(status().isBadRequest());
+
+        verify(createUserUseCase, never()).execute(any());
     }
 
     @Test
@@ -112,4 +111,5 @@ class UserControllerTest {
                         .param("document", "123.456.789-00"))
                 .andExpect(status().isNotFound());
     }
+
 }

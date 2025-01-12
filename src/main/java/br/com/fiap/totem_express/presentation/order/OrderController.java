@@ -13,8 +13,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
-//TODO: teste
 @Controller
 public class OrderController implements OrderDocumentation {
 
@@ -39,7 +39,7 @@ public class OrderController implements OrderDocumentation {
     @GetMapping("/api/order/list")
     public ResponseEntity<List<OrderView>> list() {
         List<OrderView> orders = listOrderUseCase.execute();
-        if(orders.isEmpty()){
+        if (orders.isEmpty()){
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(orders);
@@ -52,6 +52,10 @@ public class OrderController implements OrderDocumentation {
 
     @PostMapping("/api/order/create")
     public ResponseEntity<?> create(@Valid @RequestBody CreateOrderRequest createOrderRequest) {
+        if (Objects.requireNonNull(createOrderRequest.orderItems()).isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
         final var request = ApplicationUser
                 .retrieveUserId()
                 .map(createOrderRequest::with)

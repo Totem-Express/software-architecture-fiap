@@ -1,16 +1,13 @@
 package br.com.fiap.totem_express.presentation.product;
 
 import br.com.fiap.totem_express.TestcontainersConfiguration;
-import br.com.fiap.totem_express.application.product.CreateProductUseCase;
-import br.com.fiap.totem_express.application.product.DeleteProductUseCase;
-import br.com.fiap.totem_express.application.product.FindProductsByCategoryUseCase;
-import br.com.fiap.totem_express.application.product.UpdateProductUseCase;
+import br.com.fiap.totem_express.application.product.*;
 import br.com.fiap.totem_express.application.product.output.ProductView;
 import br.com.fiap.totem_express.infrastructure.jwt.JWTService;
 import br.com.fiap.totem_express.presentation.product.request.CreateProductRequest;
 import br.com.fiap.totem_express.presentation.product.request.UpdateProductRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
@@ -34,6 +31,7 @@ import static org.mockito.Mockito.*;
 
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Import(TestcontainersConfiguration.class)
@@ -57,6 +55,9 @@ class ProductControllerTest {
     @Autowired
     private JacksonTester<ProductView.SimpleView> view;
 
+    @Autowired
+    ObjectMapper objectMapper = new ObjectMapper();
+
     @MockBean
     private CreateProductUseCase createUseCase;
     @MockBean
@@ -79,28 +80,24 @@ class ProductControllerTest {
                 "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXv7hw4/200/200/original?country=br",
                 new BigDecimal("19.90"), DISH);
 
-        var response = mockMvc
-                .perform(post("/api/product")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(createRequest
-                                .write(createProduct)
-                                .getJson()
-                        )
-                )
-                .andReturn()
-                .getResponse();
-
         var expectedView = new ProductView.SimpleView(null, "Cheddar McMelt", "Um hamburguer (100% carne bovina), molho lacteo com queijo tipo cheddar, cebola ao molho shoyu e pao escuro com gergelim.",
                 "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXv7hw4/200/200/original?country=br",
                 new BigDecimal("19.90"), DISH);
 
-        when(createUseCase.create(any())).thenReturn(expectedView);
+        when(createUseCase.create(createProduct)).thenReturn(expectedView);
 
-        assertThat(response.getStatus()).isEqualTo(OK.value());
-
-        //TODO -> erro por conta do ID
-//        assertThat(response.getContentAsString()).isEqualTo(view.write(expectedView).getJson());
+        mockMvc.perform(post("/api/product")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createProduct)))
+                .andExpect(status().isOk())
+                .andExpectAll(
+                        jsonPath("$.name").value("Cheddar McMelt"),
+                        jsonPath("$.description").value("Um hamburguer (100% carne bovina), molho lacteo com queijo tipo cheddar, cebola ao molho shoyu e pao escuro com gergelim."),
+                        jsonPath("$.imagePath").value("https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXv7hw4/200/200/original?country=br"),
+                        jsonPath("$.price").value(19.90)
+                );
     }
+
 
     @Test
     void should_return_http_400_when_request_body_is_empty() throws Exception {
