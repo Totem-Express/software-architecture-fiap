@@ -5,7 +5,6 @@ import br.com.fiap.totem_express.application.payment.PaymentGateway;
 import br.com.fiap.totem_express.application.payment.output.PaymentView;
 import br.com.fiap.totem_express.domain.payment.Payment;
 
-//TODO: teste
 public class CheckPaymentStatusUseCaseImpl implements CheckPaymentStatusUseCase {
 
     private final PaymentGateway gateway;
