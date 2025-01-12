@@ -3,9 +3,15 @@ package br.com.fiap.totem_express.presentation.order;
 import br.com.fiap.totem_express.TestcontainersConfiguration;
 import br.com.fiap.totem_express.application.order.*;
 import br.com.fiap.totem_express.application.order.output.OrderView;
+import br.com.fiap.totem_express.application.product.CreateProductUseCase;
+import br.com.fiap.totem_express.application.product.impl.CreateProductUseCaseImpl;
+import br.com.fiap.totem_express.application.product.input.NewProductInput;
+import br.com.fiap.totem_express.application.product.output.ProductView;
+import br.com.fiap.totem_express.domain.product.Category;
 import br.com.fiap.totem_express.infrastructure.jwt.JWTService;
 import br.com.fiap.totem_express.presentation.order.requests.CreateOrderRequest;
 import br.com.fiap.totem_express.presentation.order.requests.OrderItemRequest;
+import br.com.fiap.totem_express.presentation.product.request.CreateProductRequest;
 import br.com.fiap.totem_express.shared.invariant.InvariantException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -53,16 +59,19 @@ class OrderControllerTest {
     @Autowired
     ObjectMapper objectMapper = new ObjectMapper();
 
+    @Autowired
+    CreateProductUseCase createProductUseCase;
 
     @Test
     void should_return_http_201_and_created_order_when_order_is_created() throws Exception {
+        ProductView productView = createProductUseCase.create(new CreateProductRequest("sandwaich", "delicious", "img.png", BigDecimal.TEN, Category.DISH));
         Set<OrderItemRequest> itemsRequest = new HashSet<>();
-        itemsRequest.add(new OrderItemRequest(1L, 2L));
+        itemsRequest.add(new OrderItemRequest(productView.id(), 2L));
         var createOrder = new CreateOrderRequest(itemsRequest, Optional.empty());
 
         var orderView = new OrderView(
                 LocalDateTime.now(), LocalDateTime.now(),
-                new HashSet<>(), BigDecimal.valueOf(30),
+                new HashSet<>(), BigDecimal.valueOf(20),
                 RECEIVED,
                 1L,
                 null
