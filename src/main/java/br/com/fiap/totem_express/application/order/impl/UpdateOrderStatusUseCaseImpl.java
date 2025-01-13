@@ -5,7 +5,6 @@ import br.com.fiap.totem_express.application.order.UpdateOrderStatusUseCase;
 import br.com.fiap.totem_express.application.order.output.OrderView;
 import br.com.fiap.totem_express.shared.invariant.InvariantException;
 
-//TODO: teste
 public class UpdateOrderStatusUseCaseImpl implements UpdateOrderStatusUseCase {
 
     private final OrderGateway gateway;
