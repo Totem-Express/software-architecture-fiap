@@ -8,7 +8,6 @@ import java.time.*;
 import java.util.*;
 import java.util.stream.*;
 
-//TODO: teste
 public record OrderView(LocalDateTime createdAt, LocalDateTime updatedAt, Set<OrderItemView> items,
                         BigDecimal total, Status status, Long id, DefaultUserView possibleUserView) {
     public OrderView(Order order) {
