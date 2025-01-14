@@ -55,14 +55,14 @@ public class OrderItemEntity {
 
     public OrderItem toDomain() {
         Order orderDomain = order.toDomain();
-        OrderItem orderItem = new OrderItem(id, createdAt, product, quantity, price);
+        OrderItem orderItem = new OrderItem(id, createdAt, product, quantity);
         orderDomain.addItem(orderItem);
         orderItem.setOrder(orderDomain);
         return orderItem;
     }
 
     public OrderItem toDomain(Order order) {
-        final var item = new OrderItem(id, createdAt, product, quantity, price);
+        final var item = new OrderItem(id, createdAt, product, quantity);
         item.setOrder(order);
         return item;
     }

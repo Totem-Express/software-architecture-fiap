@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import br.com.fiap.totem_express.domain.product.Product;
 import br.com.fiap.totem_express.infrastructure.product.*;
 
-//TODO: teste
 public class OrderItem {
     private Long id;
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -16,11 +15,8 @@ public class OrderItem {
     private BigDecimal total;
 
     public OrderItem(LocalDateTime createdAt, ProductEntity product, Order order, Long quantity) {
-        this.createdAt = createdAt;
-        this.product = product.toDomain();
+        this(null,createdAt,product, quantity);
         this.order = order;
-        this.quantity = quantity;
-        this.total = this.calculateTotal();
     }
 
     public OrderItem(Product product, Long quantity) {
@@ -29,12 +25,10 @@ public class OrderItem {
         this.total = this.calculateTotal();
     }
 
-    public OrderItem(Long id, LocalDateTime createdAt, ProductEntity product, Long quantity, BigDecimal total) {
-        this.id = id;
+    public OrderItem(Long id, LocalDateTime createdAt, ProductEntity product, Long quantity) {
+        this(product.toDomain(), quantity);
         this.createdAt = createdAt;
-        this.product = product.toDomain();
-        this.quantity = quantity;
-        this.total = this.calculateTotal();
+        this.id = id;
     }
 
     public Order getOrder() {

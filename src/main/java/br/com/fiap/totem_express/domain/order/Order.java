@@ -12,7 +12,7 @@ import br.com.fiap.totem_express.shared.invariant.Invariant;
 import static br.com.fiap.totem_express.shared.invariant.Rule.notEmpty;
 import static br.com.fiap.totem_express.shared.invariant.Rule.notNull;
 
-//TODO: teste
+
 public class Order {
     private Long id;
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -37,7 +37,7 @@ public class Order {
     public Order(LocalDateTime createdAt, LocalDateTime updatedAt, Set<OrderItem> items, User user) {
         Invariant.of(createdAt, notNull("Order created at must be not null"));
         Invariant.of(updatedAt, notNull("Order updated at must be not null"));
-        Invariant.of(items, notEmpty("Order item must be be not empty"));
+        Invariant.of(items, notNull("Order item must be be not empty") ,notEmpty("Order item must be be not empty"));
 
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -46,11 +46,6 @@ public class Order {
         this.setTotal(items);
     }
 
-    public Order(LocalDateTime createdAt, LocalDateTime updatedAt, Optional<User> user) {
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.user = user.orElse(null);
-    }
 
     public Order(Set<OrderItem> orderItemsDomain, Optional<User> user) {
         this.user = user.orElse(null);
