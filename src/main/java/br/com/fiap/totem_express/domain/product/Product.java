@@ -8,7 +8,7 @@ import br.com.fiap.totem_express.shared.invariant.Invariant;
 
 import static br.com.fiap.totem_express.shared.invariant.Rule.*;
 
-//TODO: teste
+
 public class Product {
 
     private Long id;
@@ -24,7 +24,7 @@ public class Product {
         Invariant.of(name, notBlank("Product name must be not blank"));
         Invariant.of(description, notBlank("Product description must be not blank"));
         Invariant.of(imagePath, notBlank("Product image path must be not blank"));
-        Invariant.of(price, gt(BigDecimal.ZERO, "Product price must be greater than 0"));
+        Invariant.of(price, notNull("Product price must be greater than 0") ,gt(BigDecimal.ZERO, "Product price must be greater than 0"));
         Invariant.of(category, notNull("Product category must be not blank"));
 
         this.name = name;
@@ -88,5 +88,13 @@ public class Product {
         this.price = input.price();
         this.category = input.category();
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 }
