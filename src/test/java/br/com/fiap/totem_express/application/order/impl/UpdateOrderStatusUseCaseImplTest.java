@@ -29,7 +29,7 @@ class UpdateOrderStatusUseCaseImplTest {
         Long orderId = 1L;
 
         Product product = new Product(1L, "Product 1", "Description 1", "image.png", BigDecimal.valueOf(10.0), Category.DISH);
-        Order order = spy(new Order(Set.of(new OrderItem(1L, LocalDateTime.now(), new ProductEntity(product), 1L, BigDecimal.TEN)), empty()));
+        Order order = spy(new Order(Set.of(new OrderItem(1L, LocalDateTime.now(), new ProductEntity(product), 1L)), empty()));
         ReflectionTestUtils.setField(order, "id", orderId);
         OrderGateway gateway = mock(OrderGateway.class);
         when(gateway.findById(orderId)).thenReturn(Optional.of(order));

@@ -42,7 +42,7 @@ class CreateOrderUseCaseImplTest {
         PaymentProcessorGateway qrCodeGateway = mock(PaymentProcessorGateway.class);
 
         Product product = new Product(1L, "Product 1", "Description 1", "image.png", BigDecimal.valueOf(10.0), Category.DISH);
-        Order order = new Order(Set.of(new OrderItem(1L, LocalDateTime.now(), new ProductEntity(product), 1L, BigDecimal.TEN)), empty());
+        Order order = new Order(Set.of(new OrderItem(1L, LocalDateTime.now(), new ProductEntity(product), 1L)), empty());
         ReflectionTestUtils.setField(order, "id", 1L);
         order.setPayment(new Payment(BigDecimal.valueOf(10.0)));
 
