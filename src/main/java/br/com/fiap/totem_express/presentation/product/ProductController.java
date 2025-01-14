@@ -17,7 +17,6 @@ import br.com.fiap.totem_express.presentation.product.request.CreateProductReque
 import br.com.fiap.totem_express.presentation.product.request.UpdateProductRequest;
 import jakarta.transaction.Transactional;
 
-//TODO: teste
 @RestController
 public class ProductController implements ProductDocumentation {
 

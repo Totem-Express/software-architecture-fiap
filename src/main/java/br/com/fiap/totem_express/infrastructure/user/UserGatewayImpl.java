@@ -5,7 +5,6 @@ import br.com.fiap.totem_express.domain.user.User;
 
 import java.util.*;
 
-//TODO: teste
 public class UserGatewayImpl implements UserGateway {
     private final UserRepository repository;
 
