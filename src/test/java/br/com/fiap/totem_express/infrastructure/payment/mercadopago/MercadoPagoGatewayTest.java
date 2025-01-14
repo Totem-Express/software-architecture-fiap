@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,41 +35,21 @@ class MercadoPagoGatewayTest {
 
     @Test
     void should_return_payment_qr_code_when_request_is_successful() {
-        var input = new GenerateQRCodeInput() {
-            @Override
-            public String transactionId() {
-                return "12345";
-            }
-
-            @Override
-            public String nameOrder() {
-                return "Test Order";
-            }
-
-            @Override
-            public String description() {
-                return "Order Description";
-            }
-
-            @Override
-            public BigDecimal totalAmount() {
-                return new BigDecimal("100.00");
-            }
-
-            @Override
-            public List<? extends QRCodeItemInput> items() {
-                return List.of(
+        PaymentQRCodeRequest input = new PaymentQRCodeRequest(
+                UUID.randomUUID().toString(),
+                "Test Order",
+                "Order Description",
+                new BigDecimal("100.00"),
+                List.of(
                         new PaymentQRCodeItem("Item 1", "Description 1", new BigDecimal("50.00"), 1L, "unit", new BigDecimal("50.00")),
                         new PaymentQRCodeItem("Item 2", "Description 2", new BigDecimal("50.00"), 1L, "unit", new BigDecimal("50.00"))
-                );
-            }
-        };
+                ));
+
 
         PaymentProcessorResponse expectedResponse = new PaymentProcessorResponse("qrData123", "orderId123");
         ResponseEntity<PaymentProcessorResponse> responseEntity = new ResponseEntity<>(expectedResponse, HttpStatus.OK);
 
-        when(restTemplate.exchange(any(RequestEntity.class), eq(PaymentProcessorResponse.class)))
-                .thenReturn(responseEntity);
+        when(restTemplate.exchange(any(RequestEntity.class), eq(PaymentProcessorResponse.class))).thenReturn(responseEntity);
 
         PaymentProcessorResponse actualResponse = mercadoPagoGateway.createPaymentQRCode(input);
 
@@ -76,10 +57,9 @@ class MercadoPagoGatewayTest {
         assertThat(actualResponse.getStoreOrderId()).isEqualTo(expectedResponse.getStoreOrderId());
 
         ArgumentCaptor<RequestEntity> captor = ArgumentCaptor.forClass(RequestEntity.class);
+
         verify(restTemplate).exchange(captor.capture(), eq(PaymentProcessorResponse.class));
-
         RequestEntity<PaymentQRCodeRequest> capturedRequest = captor.getValue();
-
         assertThat(capturedRequest.getHeaders().getFirst(HttpHeaders.AUTHORIZATION)).isEqualTo("Bearer test-token");
         assertThat(capturedRequest.getUrl()).isEqualTo(URI.create("https://api.mercadopago.com/qrcode"));
     }
