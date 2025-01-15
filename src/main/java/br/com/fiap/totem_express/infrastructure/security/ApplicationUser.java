@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.function.Function;
 
-//TODO: teste
 @Service
 public class ApplicationUser {
 
