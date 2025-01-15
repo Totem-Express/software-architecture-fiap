@@ -5,7 +5,6 @@ import br.com.fiap.totem_express.domain.payment.Payment;
 
 import java.util.Optional;
 
-//TODO: teste
 public class PaymentGatewayImpl implements PaymentGateway {
 
     private final PaymentRepository repository;

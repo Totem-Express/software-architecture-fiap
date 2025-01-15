@@ -9,7 +9,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-//TODO: teste
 public class FakePaymentGateway implements PaymentProcessorGateway {
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz123456789";
 

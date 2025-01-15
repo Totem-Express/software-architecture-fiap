@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 
 import static jakarta.persistence.EnumType.STRING;
 
-//TODO: teste
 @Entity(name = "payment")
 public class PaymentEntity {
 
@@ -49,7 +48,6 @@ public class PaymentEntity {
         this.amount = payment.getAmount();
         this.qrCode = payment.getQrCode();
     }
-
 
     public Payment toDomain() {
         return new Payment(id, createdAt, updatedAt, status, transactionId, amount, qrCode);

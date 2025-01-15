@@ -2,27 +2,22 @@ package br.com.fiap.totem_express.infrastructure.payment.mercadopago;
 
 import br.com.fiap.totem_express.application.payment.PaymentProcessorGateway;
 import br.com.fiap.totem_express.application.payment.input.GenerateQRCodeInput;
-import br.com.fiap.totem_express.domain.order.OrderItem;
-import br.com.fiap.totem_express.domain.product.Product;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
-import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpMethod.POST;
 
-//TODO: teste
 public class MercadoPagoGateway implements PaymentProcessorGateway {
 
     private final RestTemplate restTemplate;
 
-    private String API_TOKEN;
+    protected static String API_TOKEN;
 
-    private String API_URL;
+    protected static String API_URL;
 
     public MercadoPagoGateway(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
