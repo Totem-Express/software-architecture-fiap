@@ -1,7 +1,6 @@
 package br.com.fiap.totem_express.infrastructure.security;
 
 import br.com.fiap.totem_express.domain.user.User;
-import br.com.fiap.totem_express.infrastructure.user.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-//TODO: teste
 public class UserDetailsImpl implements UserDetails {
 
     private final User user;
