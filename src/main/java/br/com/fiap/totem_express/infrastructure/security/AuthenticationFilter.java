@@ -13,7 +13,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.Optional;
 
-//TODO: teste
 @Component
 public class AuthenticationFilter extends OncePerRequestFilter {
     private static final String AUTHENTICATION_HEADER = "Authorization";
