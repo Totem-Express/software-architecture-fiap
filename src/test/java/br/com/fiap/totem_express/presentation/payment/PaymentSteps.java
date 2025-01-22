@@ -61,8 +61,8 @@ public class PaymentSteps {
                 .andExpect(status().isOk());
     }
 
-    @Then("the response status should be {int}")
-    public void the_response_status_should_be_for_payment(int statusCode) throws Exception {
+    @Then("the payment response status should be {int}")
+    public void theResponseStatusShouldBeForPayment(int statusCode) throws Exception {
         mockMvc.perform(get("/api/payment/{id}", 1))
                 .andExpect(status().is(statusCode));
     }

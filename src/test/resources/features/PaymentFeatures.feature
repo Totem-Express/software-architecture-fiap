@@ -6,15 +6,15 @@ Feature: Payment Management
   Scenario: Successfully retrieving a payment
     Given a payment exists with id "1" and status "PAID" and qrCode "qrcode-data"
     When I send a GET request to "/api/payment/1"
-    Then the response status should be 200
+    Then the payment response status should be 200
     And the response body should contain:
-      | id    | status | qrCode      |
-      | 1     | PAID   | qrcode-data |
+      | id | status | qrCode      |
+      | 1  | PAID   | qrcode-data |
 
   Scenario: Failing to retrieve a payment that does not exist
     Given no payment exists with id "1"
     When I send a GET request to "/api/payment/1"
-    Then the response status should be 404
+    Then Then the payment response status should be 404
 
   Scenario: Successfully processing a payment
     Given a payment exists with id "1"
@@ -25,7 +25,7 @@ Feature: Payment Management
         "status": "PAID"
       }
       """
-    Then the response status should be 200
+    Then the payment response status should be 200
 
   Scenario: Failing to process a payment that does not exist
     Given no payment exists with id "1"
@@ -36,4 +36,4 @@ Feature: Payment Management
         "status": "FAILED"
       }
       """
-    Then the response status should be 404
+    Then Then the payment response status should be 404
