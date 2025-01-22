@@ -4,15 +4,21 @@ import br.com.fiap.totem_express.application.payment.CheckPaymentStatusUseCase;
 import br.com.fiap.totem_express.application.payment.ProcessPaymentWebhookUseCase;
 import br.com.fiap.totem_express.application.payment.output.PaymentView;
 import br.com.fiap.totem_express.domain.payment.Status;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+
+import java.util.List;
+import java.util.Map;
 
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class PaymentSteps {
@@ -49,4 +55,35 @@ public class PaymentSteps {
         mockMvc.perform(get(url))
                 .andExpect(status().isOk());
     }
+
+    @When("I send a POST request to {string} with body:")
+    public void i_send_a_post_request_to_with_body(String url, String body) throws Exception {
+        mockMvc.perform(post(url)
+                        .contentType("application/json")
+                        .content(body))
+                .andExpect(status().isOk());
+    }
+
+    @Then("the response status should be {int}")
+    public void the_response_status_should_be(int statusCode) throws Exception {
+        mockMvc.perform(get("/api/payment/{id}", 1))
+                .andExpect(status().is(statusCode));
+    }
+
+    @Then("the response body should contain:")
+    public void the_response_body_should_contain(io.cucumber.datatable.DataTable dataTable) throws Exception {
+        Map<String, String> row = dataTable.asMaps(String.class, String.class).get(0);
+
+        mockMvc.perform(get("/api/payment/{id}", 1))
+                .andExpect(status().isOk())
+                .andExpect(result -> {
+                    for (Map.Entry<String, String> entry : row.entrySet()) {
+                        String field = entry.getKey();
+                        String expectedValue = entry.getValue();
+
+                        jsonPath("$." + field).value(expectedValue);
+                    }
+                });
+    }
+
 }
