@@ -4,14 +4,11 @@ import br.com.fiap.totem_express.application.payment.CheckPaymentStatusUseCase;
 import br.com.fiap.totem_express.application.payment.ProcessPaymentWebhookUseCase;
 import br.com.fiap.totem_express.application.payment.output.PaymentView;
 import br.com.fiap.totem_express.domain.payment.Status;
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.List;
 import java.util.Map;
 
 import static org.mockito.Mockito.doThrow;
@@ -65,7 +62,7 @@ public class PaymentSteps {
     }
 
     @Then("the response status should be {int}")
-    public void the_response_status_should_be(int statusCode) throws Exception {
+    public void the_response_status_should_be_for_payment(int statusCode) throws Exception {
         mockMvc.perform(get("/api/payment/{id}", 1))
                 .andExpect(status().is(statusCode));
     }
