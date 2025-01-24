@@ -3,20 +3,18 @@ Feature: Payment Management
   I want to manage payments
   So that I can check payment status and process payments
 
-  Scenario: Successfully retrieving a payment
-    Given a payment exists with id 1 and status "PENDING" and qrCode "qrcode-data" 
+  Scenario: Retrieve an existing payment successfully
+    Given a payment exists with id 1, status "PENDING", and qrCode "qrcode-data"
     When I send a GET request to "/api/payment/1"
-    Then the payment response status should be 200
+    Then response status should be 200
 
-  Scenario: Failing to retrieve a payment that does not exist
-      Given no payment exists with id 1:
-      | id | status | qrCode      |
-      |    | PAID   | qrcode-data |
-      When I send a GET request to "/api/payment/1"
-      Then x the payment response status should be 404
+  Scenario: Fail to retrieve a non-existent payment
+    Given no payment exists with id 2
+    When I send a GET request to "/api/payment/2"
+    Then response status should be 404
 
-  Scenario: Successfully processing a payment
-    Given xa payment exists with id 1
+  Scenario: Process an existing payment successfully
+    Given a payment exists with id 1, status "PENDING", and qrCode "qrcode-data"
     When I send a POST request to "/api/payment/process/1" with body:
     """
     {
@@ -24,17 +22,15 @@ Feature: Payment Management
       "status": "PAID"
     }
     """
-    Then ythe payment response status should be 200
+    Then response status should be 200
 
-  Scenario: Failing to process a payment that does not exist
-    Given Xno payment exists:
-    | id | status |
-    |    | PAID   |
-    When XI send a POST request to "/api/payment/process/5" with body:
+  Scenario: Fail to process a non-existent payment
+    Given no payment exists with id 2
+    When I send a POST request to "/api/payment/process/2" with body:
     """
-          {
-            "id": 5,
-            "status": "FAILED"
-          }
-          """
-    Then Zthe payment response status should be 404
+    {
+      "id": 2,
+      "status": "PAID"
+    }
+    """
+    Then response status should be 404
