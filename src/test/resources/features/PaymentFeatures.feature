@@ -30,10 +30,10 @@ Feature: Payment Management
     Given Xno payment exists:
     | id | status |
     |    | PAID   |
-    When XI send a POST request to "/api/payment/process/3" with body:
+    When XI send a POST request to "/api/payment/process/5" with body:
     """
           {
-            "id": 3,
+            "id": 5,
             "status": "FAILED"
           }
           """
