@@ -7,6 +7,10 @@ Feature: Payment Management
     Given a payment exists with id 1, status "PENDING", and qrCode "qrcode-data"
     When I send a GET request to "/api/payment/1"
     Then response status should be 200
+    And response body should be:
+    """"
+    {"id":1,"status":"PENDING","qrCode":"qrcode-data"}
+    """
 
   Scenario: Fail to retrieve a non-existent payment
     Given no payment exists with id 2

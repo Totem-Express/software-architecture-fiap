@@ -24,6 +24,7 @@ public class PaymentSteps {
     @Autowired
     private PaymentGateway paymentGateway;
 
+    private String responseBody;
     private int responseStatus;
 
     @Given("a payment exists with id {long}, status {string}, and qrCode {string}")
@@ -35,12 +36,18 @@ public class PaymentSteps {
     @When("I send a GET request to {string}")
     public void i_send_a_get_request_to(String url) throws Exception {
         MvcResult result = mockMvc.perform(get(url)).andReturn();
+        responseBody = result.getResponse().getContentAsString();
         responseStatus = result.getResponse().getStatus();
     }
 
     @Then("response status should be {int}")
     public void response_status_should_be(int statusCode) {
         assertThat(responseStatus).isEqualTo(statusCode);
+    }
+
+    @Then("response body should be:")
+    public void response_body_should_be(String expectedBody) {
+        assertThat(responseBody).isEqualTo(expectedBody);
     }
 
 
