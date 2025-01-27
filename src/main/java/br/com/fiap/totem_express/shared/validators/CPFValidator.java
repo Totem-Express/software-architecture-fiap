@@ -41,9 +41,7 @@ public class CPFValidator {
         }
 
         var remainder = (sum * 10) % 11;
-        var check = (remainder == 10 || remainder == 11)
-                ? 0
-                : remainder;
+        var check = (remainder == 10) ? 0 : remainder;
 
         if (check != digits[FIRST_DIGIT_MAX_INDEX]){
             return false;
@@ -59,9 +57,7 @@ public class CPFValidator {
         }
 
         var remainder = (sum * 10) % 11;
-        var check = (remainder == 10 || remainder == 11)
-                ? 0
-                : remainder;
+        var check = (remainder == 10) ? 0 : remainder;
 
         if (check != digits[SECOND_DIGIT_MAX_INDEX]){
             return false;

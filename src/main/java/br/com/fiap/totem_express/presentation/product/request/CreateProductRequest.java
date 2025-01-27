@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
+//TODO: teste
 public record CreateProductRequest(
         @NotBlank String name,
         @NotBlank String description,

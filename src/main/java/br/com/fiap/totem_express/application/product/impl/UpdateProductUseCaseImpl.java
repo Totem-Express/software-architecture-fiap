@@ -8,6 +8,7 @@ import br.com.fiap.totem_express.application.product.input.UpdateProductInput;
 import br.com.fiap.totem_express.application.product.output.ProductView;
 import br.com.fiap.totem_express.domain.product.Product;
 
+
 public class UpdateProductUseCaseImpl implements UpdateProductUseCase {
 
     private final ProductGateway gateway;

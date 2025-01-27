@@ -10,7 +10,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+//TODO: teste
 public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
+
     @Query("SELECT p FROM product p WHERE p.category = :category AND p.deleted = false")
     List<ProductEntity> findAllByCategory(@Param("category") Category category);
 

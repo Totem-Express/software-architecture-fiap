@@ -1,6 +1,5 @@
 package br.com.fiap.totem_express.application.order.input;
 
-import br.com.fiap.totem_express.application.payment.PaymentGateway;
 import br.com.fiap.totem_express.application.user.*;
 import br.com.fiap.totem_express.domain.order.Order;
 import br.com.fiap.totem_express.domain.order.OrderItem;

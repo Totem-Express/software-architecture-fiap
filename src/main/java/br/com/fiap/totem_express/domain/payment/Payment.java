@@ -6,15 +6,13 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static br.com.fiap.totem_express.domain.payment.Status.FAILED;
-import static br.com.fiap.totem_express.domain.payment.Status.PAID;
 import static br.com.fiap.totem_express.shared.invariant.Rule.notNull;
 
 public class Payment {
 
     private Long id;
     private LocalDateTime createdAt = LocalDateTime.now();
-    private LocalDateTime updatedAt = LocalDateTime.now();;
+    private LocalDateTime updatedAt = LocalDateTime.now();
     private Status status = Status.PENDING;
     private String transactionId;
     private BigDecimal amount;

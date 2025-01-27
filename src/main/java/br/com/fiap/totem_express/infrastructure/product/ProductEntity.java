@@ -11,7 +11,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.hibernate.annotations.SoftDelete;
 
-
+//TODO: teste
 @Entity(name = "product")
 public class ProductEntity {
     @Id

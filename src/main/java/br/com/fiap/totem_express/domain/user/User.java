@@ -34,7 +34,7 @@ public class User {
     public User(Long id, String name, String email, String cpf, LocalDateTime createdAt, Role role) {
         this(name, email, cpf, role);
         Invariant.of(id, notNull("User id must be not null"));
-        Invariant.of(id, notNull("User created at must be not null"));
+        Invariant.of(createdAt, notNull("User created at must be not null"));
 
         this.id = id;
         this.createdAt = createdAt;

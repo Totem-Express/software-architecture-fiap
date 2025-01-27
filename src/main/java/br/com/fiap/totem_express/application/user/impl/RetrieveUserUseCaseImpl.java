@@ -4,7 +4,6 @@ import br.com.fiap.totem_express.application.user.RetrieveUserUseCase;
 import br.com.fiap.totem_express.application.user.UserGateway;
 import br.com.fiap.totem_express.application.user.output.DefaultUserView;
 
-import java.util.List;
 import java.util.Optional;
 
 public class RetrieveUserUseCaseImpl implements RetrieveUserUseCase {

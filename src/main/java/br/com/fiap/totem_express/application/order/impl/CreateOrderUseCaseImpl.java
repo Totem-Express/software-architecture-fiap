@@ -18,6 +18,7 @@ import br.com.fiap.totem_express.infrastructure.payment.mercadopago.PaymentQRCod
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
     private final OrderGateway orderGateway;
     private final ProductGateway productGateway;

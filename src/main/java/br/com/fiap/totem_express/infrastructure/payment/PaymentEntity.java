@@ -49,7 +49,6 @@ public class PaymentEntity {
         this.qrCode = payment.getQrCode();
     }
 
-
     public Payment toDomain() {
         return new Payment(id, createdAt, updatedAt, status, transactionId, amount, qrCode);
     }
